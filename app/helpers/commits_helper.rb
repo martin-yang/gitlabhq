@@ -184,12 +184,12 @@ module CommitsHelper
   def link_to_browse_code(project, commit)
     if current_controller?(:projects, :commits)
       if @repo.blob_at(commit.id, @path)
-        return link_to "Browse File »", project_blob_path(project, tree_join(commit.id, @path)), class: "pull-right"
+        return link_to "Browse File >>", project_blob_path(project, tree_join(commit.id, @path)), class: "pull-right"
       elsif @path.present?
-        return link_to "Browse Dir »", project_tree_path(project, tree_join(commit.id, @path)), class: "pull-right"
+        return link_to "Browse Dir >>", project_tree_path(project, tree_join(commit.id, @path)), class: "pull-right"
       end
     end
-    link_to "Browse Code »", project_tree_path(project, commit), class: "pull-right"
+    link_to "Browse Code >>", project_tree_path(project, commit), class: "pull-right"
   end
 
   protected
@@ -209,7 +209,7 @@ module CommitsHelper
     user = User.find_for_commit(source_email, source_name)
     person_name = user.nil? ? source_name : user.name
     person_email = user.nil? ? source_email : user.email
-
+    if person_name.eql?("Jaussoin Timothée") then person_name = "Jaussoin Timothee" end
     text = if options[:avatar]
             avatar = image_tag(avatar_icon(person_email, options[:size]), class: "avatar #{"s#{options[:size]}" if options[:size]}", width: options[:size], alt: "")
             %Q{#{avatar} <span class="commit-#{options[:source]}-name">#{person_name}</span>}

@@ -80,7 +80,7 @@ class Commit
     @description ||= if (!title_end && safe_message.length > 100) || (title_end && title_end > 100)
                     "&hellip;".html_safe << safe_message[80..-1]
                   else
-                    safe_message.split(/\n/, 2)[1].try(:chomp)
+                    safe_message.split('\n', 2)[1].try(:chomp)
                   end
   end
 
